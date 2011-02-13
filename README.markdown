@@ -17,8 +17,8 @@ or 'open console' key), and the right bracket key (']', for the
 single quote key). It would be possible to add functionality to
 read the keys to remap from a configuration file (like MGE).
 
-In fact, this project was largely inspired by the Morrowind Graphics
-Extender project, specifically because that project requires
+In fact, this project was largely inspired by the [Morrowind Graphics
+Extender](http://sourceforge.net/projects/morrgraphext/) project, specifically because that project requires
 Bloodmoon to use, and I don't have Bloodmoon. So I spent a frustrating
 day trying to find some way to use MGE anyway, and ended up
 recoding the DInput wrapper part to suit my own purpose. The basic
