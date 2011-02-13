@@ -1,5 +1,6 @@
-Morrowind Key Remapper
+#Morrowind Key Remapper
 
+##Overview
 A DirectX keyboard device wrapper to remap the Morrowind
 keys for opening the console and typing a quote character.
 
