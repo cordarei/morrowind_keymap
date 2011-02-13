@@ -1,6 +1,17 @@
-// dllmain.cpp : DLL アプリケーションのエントリ ポイントを定義します。
+/**
+ * File: dllmain.cpp
+ * Author: Joseph I.
+ *
+ * Entry point when the DLL is loaded.
+ * There is nothing to do here for now.
+ */
+
 #include "stdafx.h"
 
+/**
+ * \function DllMain
+ * \brief Entry point when DLL is loaded
+ */
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved

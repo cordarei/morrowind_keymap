@@ -1,6 +1,20 @@
+/**
+ * File: WrapDirectInput.h
+ * Author: Joseph I.
+ *
+ * Defines WrapDirectInput class.
+ *
+ * Note: use ANSI version (~A) of all DX classes
+ */
+
 #pragma once
 #include "dinput.h"
 
+/**
+ * \class WrapDirectInput
+ * \brief Wraps the DirectInput interface class to
+ * return our own Keyboard device wrapper class.
+ */
 class WrapDirectInput : public IDirectInput8A
 {
 public:
@@ -17,6 +31,10 @@ public:
         return RealInput->Release();
     }
 
+	/**
+	 * \method WrapDirectInput::CreateDevice
+	 * \brief returns our wrapper class if keyboard device requested
+	 */
 	HRESULT _stdcall CreateDevice(REFGUID r,IDirectInputDevice8A** device,IUnknown* unused);
 
 	HRESULT _stdcall EnumDevices(DWORD a,LPDIENUMDEVICESCALLBACKA b,void* c,DWORD d) {
@@ -41,5 +59,5 @@ public:
         return RealInput->ConfigureDevices(a,b,c,d);
     }
 private:
-	IDirectInput8* RealInput;
+	IDirectInput8A* RealInput;
 };

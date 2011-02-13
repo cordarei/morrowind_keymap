@@ -1,11 +1,26 @@
+/**
+ * File: WrapDirectInputDevice.h
+ * Author: Joseph I.
+ *
+ * Defines WrapDirectInputDevice class.
+ *
+ * Note: use ANSI version (~A) of all DX classes
+ */
+
 #pragma once
 #include "dinput.h"
 
-
+/**
+ * \class WrapDirectInputDevice
+ * \brief Wraps the DirectInputDevice interface class to
+ * return our own Keyboard device wrapper class.
+ *
+ * Should only be initialized with a GUID_SysKeyboard device interface.
+ */
 class WrapDirectInputDevice : public IDirectInputDevice8A
 {
 public:
-	WrapDirectInputDevice(IDirectInputDevice8* device) : RealDevice(device) {}
+	WrapDirectInputDevice(IDirectInputDevice8A* device) : RealDevice(device) {}
 
 	/*** IUnknown methods ***/
     HRESULT _stdcall QueryInterface (REFIID riid,void** ppvObj) {
@@ -52,10 +67,10 @@ public:
     HRESULT _stdcall SetCooperativeLevel(HWND a,DWORD b) {
         return RealDevice->SetCooperativeLevel(a,b);
     }
-    HRESULT _stdcall GetObjectInfo(DIDEVICEOBJECTINSTANCE* a,DWORD b,DWORD c) {
+    HRESULT _stdcall GetObjectInfo(DIDEVICEOBJECTINSTANCEA* a,DWORD b,DWORD c) {
         return RealDevice->GetObjectInfo(a,b,c);
     }
-    HRESULT _stdcall GetDeviceInfo(DIDEVICEINSTANCE* a) {
+    HRESULT _stdcall GetDeviceInfo(DIDEVICEINSTANCEA* a) {
         return RealDevice->GetDeviceInfo(a);
     }
     HRESULT _stdcall RunControlPanel(HWND a,DWORD b) {
@@ -67,10 +82,10 @@ public:
     HRESULT _stdcall CreateEffect(REFGUID a,const DIEFFECT* b,LPDIRECTINPUTEFFECT* c,IUnknown* d) {
         return RealDevice->CreateEffect(a,b,c,d);
     }
-    HRESULT _stdcall EnumEffects(LPDIENUMEFFECTSCALLBACK a,void* b,DWORD c) {
+    HRESULT _stdcall EnumEffects(LPDIENUMEFFECTSCALLBACKA a,void* b,DWORD c) {
         return RealDevice->EnumEffects(a,b,c);
     }
-    HRESULT _stdcall GetEffectInfo(DIEFFECTINFO* a,REFGUID b) {
+    HRESULT _stdcall GetEffectInfo(DIEFFECTINFOA* a,REFGUID b) {
         return RealDevice->GetEffectInfo(a,b);
     }
     HRESULT _stdcall GetForceFeedbackState(DWORD* a) {
@@ -97,13 +112,13 @@ public:
     HRESULT _stdcall WriteEffectToFile(const char* a,DWORD b,DIFILEEFFECT* c,DWORD d) {
         return RealDevice->WriteEffectToFile(a,b,c,d);
     }
-    HRESULT _stdcall BuildActionMap(DIACTIONFORMAT* a,const char* b,DWORD c) {
+    HRESULT _stdcall BuildActionMap(DIACTIONFORMATA* a,const char* b,DWORD c) {
         return RealDevice->BuildActionMap(a,b,c);
     }
-    HRESULT _stdcall SetActionMap(DIACTIONFORMAT* a,const char* b,DWORD c) {
+    HRESULT _stdcall SetActionMap(DIACTIONFORMATA* a,const char* b,DWORD c) {
         return RealDevice->SetActionMap(a,b,c);
     }
-    HRESULT _stdcall GetImageInfo(DIDEVICEIMAGEINFOHEADER* a) {
+    HRESULT _stdcall GetImageInfo(DIDEVICEIMAGEINFOHEADERA* a) {
         return RealDevice->GetImageInfo(a);
     }
 

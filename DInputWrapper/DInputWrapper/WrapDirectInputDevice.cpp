@@ -1,14 +1,34 @@
+/**
+ * File: WrapDirectInput.h
+ * Author: Joseph I.
+ *
+ * WrapDirectInputDevice class implementation.
+ *
+ * Note: use ANSI version (~A) of all DX classes
+ * TODO: document parameters (what are a,b,c,d??)
+ */
 #include "StdAfx.h"
 #include "WrapDirectInputDevice.h"
 
 
 namespace {
+	/// Default console key for Morrowind ('~' on US keyboard)
 	BYTE const ConsoleKey = 0x29;
+	/// Mapped console key (Insert)
 	BYTE const MappedConsoleKey = 0xd2;//ins
+	/// Default quote key for Morrowind, for typing single and double quotes ('\'' on US keyboard)
 	BYTE const QuoteKey = 0x28; //DIK_APOSTROPHE
+	/// Mapped quote key (']' on JIS keyboard)
 	BYTE const MappedQuoteKey = 0x1b;//']' for jpn kbd
+	/// Keyboard state size (256 scan codes)
 	size_t const KeyStateSize = 256;
 
+	/**
+	 * \function swap
+	 * \brief swap two pointers
+	 *
+	 * \templateparam T type pointed to
+	 */
 	template <typename T>
 	inline void swap(T * left, T * right) {
 		T temp = *left;
@@ -18,20 +38,18 @@ namespace {
 }
 
 
+/**
+ * \method WrapDirectInputDevice::GetDeviceState
+ * \brief gets the (re-mapped) keyboard key state
+ *
+ * Right now just swaps BYTES pointed to. Eventually there will
+ * probably be a configuration file and this will get more
+ * sophisticated.
+ */
 HRESULT _stdcall 
 WrapDirectInputDevice::GetDeviceState(DWORD a,void* b) {
-	//BYTE* b2=(BYTE*)b;
-	//BYTE bytes[256];    //Create an array of 256 bytes to store the keystates
-	//HRESULT hr=RealDevice->GetDeviceState(256,bytes);
-	//if(hr!=DI_OK) return hr;    //Error getting device, so return
-	////We only want to modify keyboard input in alternate combat mode when the player has the mouse held down
-	//ZeroMemory(b,256);
-	//for(int i=0;i<256;i++) {
-	//	if(RemappedKeys[i]) b2[RemappedKeys[i]]=bytes[i]; else b2[i]=bytes[i];
-	//}
-	//return DI_OK;
 	HRESULT hr=RealDevice->GetDeviceState(a, b);
-	if(hr!=DI_OK) return hr;    //Error getting device, so return
+	if(hr!=DI_OK) return hr;    //Error getting device state, so return
 	
 	if (KeyStateSize == a) {
 		//swap console key
@@ -43,6 +61,14 @@ WrapDirectInputDevice::GetDeviceState(DWORD a,void* b) {
 	return DI_OK;
 }
 
+/**
+ * \method WrapDirectInputDevice::GetDeviceState
+ * \brief gets the (re-mapped) key state of a specific key
+ *
+ * Right now just switches offsets. Eventually there will
+ * probably be a configuration file and this will get more
+ * sophisticated.
+ */
 HRESULT _stdcall 
 WrapDirectInputDevice::GetDeviceData(DWORD a,DIDEVICEOBJECTDATA* b,DWORD* c,DWORD d) {
 

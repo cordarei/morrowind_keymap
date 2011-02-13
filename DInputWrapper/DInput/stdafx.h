@@ -1,17 +1,15 @@
-// stdafx.h : 標準のシステム インクルード ファイルのインクルード ファイル、または
-// 参照回数が多く、かつあまり変更されない、プロジェクト専用のインクルード ファイル
-// を記述します。
-//
+/**
+ * File: stdafx.h
+ * Author: Joseph I.
+ * 
+ * Define standard include files.
+ */
 
 #pragma once
 
 #include "targetver.h"
 
-#define WIN32_LEAN_AND_MEAN             // Windows ヘッダーから使用されていない部分を除外します。
-// Windows ヘッダー ファイル:
+#define WIN32_LEAN_AND_MEAN
+//Windows include files
 #include <windows.h>
 #include <comdef.h>
-
-
-
-// TODO: プログラムに必要な追加ヘッダーをここで参照してください。
